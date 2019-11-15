@@ -7,12 +7,12 @@ This document describes the prerequisites required to run .NET Core applications
 * openssl
 * libnghttp2
 * libidn
-* krb5
+* krb5-libs
 * libuuid
 * lttng-ust
 * zlib
 
-.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. CURL is required if the application references System.Net.Http.dll. ICU is needed except if globalization is disabled. Globalization can be disabled by setting the environment variable `CORECLR_GLOBAL_INVARIANT` to 1 or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for a console app:
+.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. CURL is required if the application references System.Net.Http.dll. ICU is needed except if globalization is disabled. Globalization can be disabled by setting the environment variable `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT` to `true` or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for a console app:
 ```json
 {
     "runtimeOptions": {
@@ -22,6 +22,8 @@ This document describes the prerequisites required to run .NET Core applications
     }
 }
 ```
+For more information about enabling or disabling the Globalization, you may refer to the [Globalization Invariant Mode Doc](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/globalization-invariant-mode.md)
+
 ## Getting the libraries that are not available as packages.
 ### ICU
 The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
@@ -75,7 +77,7 @@ The following command performs the build with the right settings for .NET Core:
     --with-gssapi \
     --with-ssl \
     --without-librtmp \
-    --prefix=$PWD/install/usr/local
+    --prefix=$PWD/install/usr/local \
 && \
 make install
 ```
@@ -94,8 +96,9 @@ tar -xf icu4c-57_1-RHEL6-x64.tgz -C /
 ```
 Then set `LD_LIBRARY_PATH` to `/usr/local/lib` before running the application:
 ```sh
-export LD_LIBRARY_PATH=/usr/local/lib
+LD_LIBRARY_PATH=/usr/local/lib your_dotnet_app
 ```
+**Important** - please make sure that you do not set the LD_LIBRARY_PATH using `export` in your current shell or even globally for your session. Linux applications that depend on the default CURL (like the `yum`) would stop working.
 ### Install the libraries into the netcoredeps subdirectory of your .NET Core application
 This works only for self-contained published apps. Create the `netcoredeps` subdirectory in the same directory where your apps main executable is located. Then change the current directory to the `netcoredeps` and extract the libraries into that directory as follows:
 ```sh

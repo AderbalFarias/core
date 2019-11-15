@@ -4,6 +4,12 @@ The following .NET Core 2.2 releases have been shipped. You must be on the lates
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
+| 2019/12/23 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md) | - |
+|  |  |  | - |
+| 2019/09/10 | 2.2.7 | [release notes](2.2.7/2.2.7.md)/[download](2.2.7/2.2.7-download.md) | - |
+| 2019/07/09 | 2.2.6 | [release notes](2.2.6/2.2.6.md)/[download](2.2.6/2.2.6-download.md) | - |
+| 2019/05/14 | 2.2.5 | [release notes](2.2.5/2.2.5.md)/[download](2.2.5/2.2.5-download.md) | - |
+| 2019/04/09 | 2.2.4 | [release notes](2.2.4/2.2.4.md)/[download](2.2.4/2.2.4-download.md) | - |
 | 2019/03/12 | 2.2.3 | [release notes](2.2.3/2.2.3.md)/[download](2.2.3/2.2.3-download.md) | - |
 | 2019/02/12 | 2.2.2 | [release notes](2.2.2/2.2.2.md)/[download](2.2.2/2.2.2-download.md) | - |
 | 2019/01/08 | 2.2.1 | [release notes](2.2.1/2.2.1.md)/[download](2.2.1/2.2.1-download.md) | - |
